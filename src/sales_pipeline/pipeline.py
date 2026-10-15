@@ -8,9 +8,10 @@ from . import transform
 from . import transform_products
 from . import transform_customers
 from . import transform_sales
+from . import database
 
 
-def run_pipeline(data_dir, output_dir):
+def run_pipeline(data_dir, output_dir, database_url=None):
     data_dir = Path(data_dir)
     output_dir = Path(output_dir)
     output_dir.mkdir(parents=True, exist_ok=True)
@@ -85,6 +86,16 @@ def run_pipeline(data_dir, output_dir):
                 f"Pipeline output is missing or empty: {path}"
             )
 
+    database_results = None
+
+    if database_url is not None:
+        print("\n[6/6] Loading analytics into PostgreSQL...")
+        database_results = database.load_processed_csvs(
+            database_url=database_url,
+            processed_dir=output_dir,
+        )
+        print("PostgreSQL loading completed successfully.")
+
     finished_at = datetime.now(timezone.utc)
     duration = (finished_at - started_at).total_seconds()
 
@@ -100,6 +111,8 @@ def run_pipeline(data_dir, output_dir):
         "monthly_rows": len(monthly_sales),
         "status_rows": len(status_summary),
         "outputs": [str(path) for path in outputs],
+        "database_loaded": database_results is not None,
+        "database_results": database_results,
     }
 
     print("\n" + "=" * 64)
