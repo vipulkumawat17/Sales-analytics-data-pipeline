@@ -1,0 +1,26 @@
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+.env
+
+# Jupyter
+.ipynb_checkpoints/
+
+# Local data (keep real datasets out of Git)
+data/*
+!data/.gitkeep
+
+# Generated logs and outputs
+logs/*
+!logs/.gitkeep
+outputs/
+
+# Reports: commit only if intentionally version-controlled
+reports/*
+!reports/.gitkeep
+
+# Local database files
+*.sqlite
+*.db
