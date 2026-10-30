@@ -1,0 +1,7 @@
+metric,numerator,denominator,rate_pct,definition
+validation_check_pass_rate,27,27,100.0,Passed validation checks divided by total validation checks
+required_field_null_rate,0,988079,0.0,Null values across required fields divided by all required-field values examined
+duplicate_key_rate,0,347578,0.0,Duplicate key rows across tested primary/composite keys divided by rows examined
+referential_integrity_violation_rate,0,640501,0.0,Unmatched non-null foreign-key values divided by non-null foreign-key values examined
+invalid_numeric_value_rate,0,433072,0.0,Negative or unparseable non-null numeric values divided by non-null numeric values examined
+invalid_review_score_rate,0,99224,0.0,"Null, non-integer, or out-of-range review scores divided by all review rows"
